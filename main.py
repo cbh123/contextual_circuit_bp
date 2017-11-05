@@ -17,7 +17,7 @@ from ops import hp_opt_utils
 
 
 def print_model_architecture(model_summary):
-    """Print a fancy summary of model architectre
+    """Print a fancy summary of model architecture
 
     Parameters
     ----------
@@ -25,7 +25,7 @@ def print_model_architecture(model_summary):
 
     Returns
     -------
-    str
+    string summarizing model archicture
 
     """
     print '_' * 20
@@ -42,11 +42,11 @@ def add_to_config(d, config):
     Parameters
     ----------
     d : dictionary of attributes
-    config : ***
+    config : config object defined in config.py
 
     Returns
     -------
-    updated config
+    config updated with new attrributes
 
     """
     for k, v in d.iteritems():
@@ -61,12 +61,12 @@ def process_DB_exps(experiment_name, log, config):
     ----------
     experiment_name : str
     log : iterable object
-    config : ***
+    config : config object defined in config.py
 
     Returns
     -------
-    config : ***
-    proc_exp_params : dictionary
+    config : config object
+    proc_exp_params : dictionary of experiment parameters
 
     """
     exp_params, exp_id = db.get_parameters(
@@ -105,6 +105,10 @@ def get_data_pointers(dataset, base_dir, cv, log):
     base_dir : str
     cv : dataset_module.folds.keys()
     log : iterable object
+
+    Returns
+    -------
+    string that leads to directory of data
 
     """
     data_pointer = os.path.join(base_dir, '%s_%s.tfrecords' % (dataset, cv))

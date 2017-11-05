@@ -7,15 +7,38 @@ class experiments():
     """Class for experiments."""
 
     def __getitem__(self, name):
-        """Method for addressing class methods."""
+        """Method for addressing class methods.
+
+        Parameters
+        ----------
+        self : object
+        name : str
+
+        Returns
+        -------
+        returns experiments' name
+
+        """
         return getattr(self, name)
 
     def __contains__(self, name):
-        """Method for checking class contents."""
+        """Method for checking class contents.
+        
+        Parameters
+        ----------
+        self : object
+        name : str
+
+        Returns 
+        -------
+        returns boolean True if name is one of experiments' attributes
+
+        """
         return hasattr(self, name)
 
     def globals(self):
-        """Global variables for all experiments.
+        """ returns global variables for all experiments.
+        Change global experiment variables here
 
         Returns
         -------
@@ -38,7 +61,7 @@ class experiments():
                     'left_right'
                 ]
             ],  
-            'epochs': 200,
+            'epochs': 200, # How many epochs?
             'shuffle': True,  # Shuffle data.
             'validation_iters': 5000,  # How often to evaluate validation.
             'num_validation_evals': 100,  # How many validation batches.
@@ -49,7 +72,7 @@ class experiments():
         }
 
     def add_globals(self, exp):
-        """Add global attributes to this class.
+        """Add global attributes to this experiments class.
 
         Parameters
         ----------
@@ -57,12 +80,15 @@ class experiments():
 
         Returns
         –––––––
-        exp: dictionary
+        exp: dictionary of experiments
 
         """
         for k, v in self.globals().iteritems():
             exp[k] = v
         return exp
+
+    # EXPERIMENTS :
+    # ------------------------------------------------------------------------
 
     def perceptual_iq_hp_optimization(self):
         """Each key in experiment_dict must be manually added to the schema.
