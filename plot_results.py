@@ -15,6 +15,20 @@ import plotly.tools as tls
 
 
 def plot_with_plotly(plotly_fig, chart):
+    """
+    Uploads a chart to plotly to plot
+
+    Parameters
+    ----------
+    plotly_fig : image file 
+    chart : chart type
+
+    Returns
+    -------
+    url of plot
+
+    """
+
     try:
         plot_url = py.plot(plotly_fig, auto_open=False)
         print 'Uploaded %s chart to: %s' % (chart, plot_url)
@@ -29,7 +43,20 @@ def main(
         colors='Paired',
         flip_axis=False,
         exclude=None):
-    """Plot results of provided experiment name."""
+
+    """
+    Plot results of provided experiment name.
+
+    Parameters
+    ----------
+    experiment_name : str
+    im_ext : str
+    transform_loss : int
+    colors : str
+    flip_axis : bool
+    exclude : str
+
+    """
     config = Config()
     pl_creds = credentials.plotly_credentials()
     py.sign_in(
