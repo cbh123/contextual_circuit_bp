@@ -17,7 +17,17 @@ from ops import hp_opt_utils
 
 
 def print_model_architecture(model_summary):
-    """Print a list fancy."""
+    """Print a fancy summary of model architectre
+
+    Parameters
+    ----------
+    model_summary : list
+
+    Returns
+    -------
+    str
+
+    """
     print '_' * 20
     print 'Model architecture:'
     print '_' * 20
@@ -27,14 +37,38 @@ def print_model_architecture(model_summary):
 
 
 def add_to_config(d, config):
-    """Add attributes to config class."""
+    """Add attributes to config class.
+    
+    Parameters
+    ----------
+    d : dictionary of attributes
+    config : ***
+
+    Returns
+    -------
+    updated config
+
+    """
     for k, v in d.iteritems():
         setattr(config, k, v)
     return config
 
 
 def process_DB_exps(experiment_name, log, config):
-    """Interpret and prepare hyperparams at runtime."""
+    """Interpret and prepare hyperparams at runtime.
+
+    Parameters
+    ----------
+    experiment_name : str
+    log : iterable object
+    config : ***
+
+    Returns
+    -------
+    config : ***
+    proc_exp_params : dictionary
+
+    """
     exp_params, exp_id = db.get_parameters(
         experiment_name=experiment_name,
         log=log)
@@ -63,7 +97,16 @@ def process_DB_exps(experiment_name, log, config):
 
 
 def get_data_pointers(dataset, base_dir, cv, log):
-    """Get data file pointers."""
+    """Get data file pointers.
+
+    Parameters 
+    ----------
+    dataset : iterable object
+    base_dir : str
+    cv : dataset_module.folds.keys()
+    log : iterable object
+
+    """
     data_pointer = os.path.join(base_dir, '%s_%s.tfrecords' % (dataset, cv))
     data_means = os.path.join(base_dir, '%s_%s_means.npy' % (dataset, cv))
     log.info(
@@ -96,7 +139,16 @@ def main(
         experiment_name,
         list_experiments=False,
         gpu_device='/gpu:0'):
-    """Create a tensorflow worker to run experiments in your DB."""
+
+    """Create a tensorflow worker to run experiments in your DB.
+
+    Parameters
+    ----------
+    experiment_name : str
+    list_experiments : bool
+    gpu_device : str
+
+    """
     if list_experiments:
         exps = db.list_experiments()
         print '_' * 30
