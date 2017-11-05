@@ -15,15 +15,29 @@ class experiments():
         return hasattr(self, name)
 
     def globals(self):
-        """Global variables for all experiments."""
+        """Global variables for all experiments.
+
+        Returns
+        -------
+        batch_size : int
+        data_augmentations : list of str
+        epochs : int
+        shuffle : bool
+        validation_iters : int
+        num_validation_evals : int
+        top_n_validation : int
+        early_stop : bool
+        save_weights : bool
+        optimizer_constraints : dictionary
+        """
         return {
             'batch_size': 64,  # Train/val batch size.
-            'data_augmentations': [
+            'data_augmentations': [ # Data augmentations
                 [
                     'random_crop',
                     'left_right'
                 ]
-            ],  # TODO: document all data augmentations.
+            ],  
             'epochs': 200,
             'shuffle': True,  # Shuffle data.
             'validation_iters': 5000,  # How often to evaluate validation.
@@ -35,7 +49,17 @@ class experiments():
         }
 
     def add_globals(self, exp):
-        """Add attributes to this class."""
+        """Add global attributes to this class.
+
+        Parameters
+        ----------
+        exp : dictionary 
+
+        Returns
+        –––––––
+        exp: dictionary
+
+        """
         for k, v in self.globals().iteritems():
             exp[k] = v
         return exp
@@ -43,20 +67,20 @@ class experiments():
     def perceptual_iq_hp_optimization(self):
         """Each key in experiment_dict must be manually added to the schema.
 
-        If using grid-search -- put hps in lists.
+        If using grid-search -- put hyperparameters (hps) in lists.
         If using hp-optim, do not use lists except for domains.
         """
         model_folder = 'perceptual_iq_hp_optimization'
         exp = {
-            'experiment_name': model_folder,
-            'hp_optim': 'gpyopt',
-            'hp_multiple': 10,
-            'lr': 1e-4,
+            'experiment_name': model_folder, # Change to experiment name
+            'hp_optim': 'gpyopt', # Hyperparameter optimization type
+            'hp_multiple': 10,  
+            'lr': 1e-4, # Learning rate
             'lr_domain': [1e-1, 1e-5],
             'loss_function': None,  # Leave as None to use dataset default
-            'optimizer': 'adam',
-            'regularization_type': None,  # [None, 'l1', 'l2'],
-            'regularization_strength': 1e-5,
+            'optimizer': 'adam', # Optimizer
+            'regularization_type': None,  # Options are [None, 'l1', 'l2'],
+            'regularization_strength': 1e-5, 
             'regularization_strength_domain': [1e-1, 1e-7],
             # 'timesteps': True,
             'model_struct': [
@@ -65,7 +89,7 @@ class experiments():
                 os.path.join(model_folder, 'divisive_2l'),
                 os.path.join(model_folder, 'layer_2l'),
             ],
-            'dataset': 'ChallengeDB_release'
+            'dataset': 'ChallengeDB_release' # Change to dataset name
         }
         return self.add_globals(exp)  # Add globals to the experiment
 
